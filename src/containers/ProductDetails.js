@@ -16,6 +16,7 @@ const ProductDetails=()=>{
     const response = await axios.get('https://fakestoreapi.com/products/'+productId).catch((err)=>{
       console.log("There was an error: "+ err);
     });
+    console.log("response.data");
     console.log(response.data);
     dispatch(selectedProduct(response.data)); // dispatch action when we get data.
   }

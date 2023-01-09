@@ -8,8 +8,7 @@ const ProductDetailsComponent=()=>{
   const renderProduct=()=>{
     
     return (
-      <div className="ui grid container">
-      { Object.keys(product).length===0 ? ( 
+      Object.keys(product).length===0 ? ( 
         <div>...Loading</div> 
       ) : (
       <div className="ui placeholder segment">
@@ -36,10 +35,9 @@ const ProductDetailsComponent=()=>{
         </div>
       </div>
     </div>
+    )
+    
   )
-  }
-</div>
-      )
   }
 
   return <>{renderProduct()}</>
