@@ -1,13 +1,14 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectedProduct } from '../redux/actions/productActions';
+import { selectedProduct, removeSelectedProduct } from '../redux/actions/productActions';
 import { useParams } from "react-router-dom";
 import ProductDetailsComponent from './ProductDetailsComponent';
 
 const ProductDetails=()=>{
-  const product = useSelector((state)=>state);
-  console.log("Single Product Listing"+product);
+  const product = useSelector((state)=>state.selectedProduct);
+  console.log("product=>");
+  console.log(product);
   const dispatch = useDispatch();
   const { productId } = useParams();
   console.log("productId: "+productId);
@@ -19,9 +20,16 @@ const ProductDetails=()=>{
     dispatch(selectedProduct(response.data)); // dispatch action when we get data.
   }
 
+  // [productId] means this will run whenever the productId changes.
+  // Cleanup to remove item goes in here. Otherwise previous item will display when you click on a new item.
   useEffect(()=>{
-    fetchProductDetail(productId)
-  },[]);
+    if (productId&&productId!=''){
+      fetchProductDetail(productId);
+    }
+    return ()=>{
+      dispatch(removeSelectedProduct())
+    }
+  },[productId]);
 
   return (
     <div className='ui grid container'>
