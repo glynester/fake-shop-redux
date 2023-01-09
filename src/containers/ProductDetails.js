@@ -22,14 +22,12 @@ const ProductDetails=()=>{
 
   // [productId] means this will run whenever the productId changes.
   // Cleanup to remove item goes in here. Otherwise previous item will display when you click on a new item.
-  useEffect(()=>{
-    if (productId&&productId!=''){
-      fetchProductDetail(productId);
-    }
-    return ()=>{
-      dispatch(removeSelectedProduct())
-    }
-  },[productId]);
+  useEffect(() => {
+    if (productId && productId !== "") fetchProductDetail(productId);
+    return () => {
+      dispatch(removeSelectedProduct());
+    };
+  }, [productId]);
 
   return (
     <div className='ui grid container'>
